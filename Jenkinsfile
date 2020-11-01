@@ -29,5 +29,26 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            agent any
+            environment {
+                VOLUME = '$(pwd)/sources:/src'
+                IMAGE = 'cdrx/pyinstaller-linux:python3'
+            }
+            steps{
+                dir(path: env.build_ID) {
+                    unstash(name: 'compiled-results')
+                    echo "compilando..."
+                    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F calcs.py'"
+                }
+            }
+            post {
+                success {
+                    echo "Limpiando el folder con la application empaquetada"
+                    archiveArtifacts "${env.BUILD_ID}/sources/dist/calcs"
+                    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
+                }
+            }
+        }
     }
 }
