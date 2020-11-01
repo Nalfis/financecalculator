@@ -2,7 +2,6 @@ import argparse
 import FinanceCalcs
 
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument("-si", "--simple_interest", type=bool, default=False, required=False, help="Calculate Simple Interest")
 parser.add_argument("-fv", "--futura_value", type=bool, default=False, required=False, help="Calculate Future Value")
@@ -21,8 +20,8 @@ parser.add_argument("-m", "--compound_periods", type=int, required=True, help="n
 parser.parse_args()
 args = parser.parse_args()
 simpargs = {'principal': args.principal,
-                'interest_rate': args.interest,
-                'time': args.time}
+            'interest_rate': args.interest,
+            'time': args.time}
 simplecalc = FinanceCalcs.SimpleFinanceCalc()
 if args.simple_interest:
     simplecalc.s_interest(**simpargs)
