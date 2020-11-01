@@ -1,4 +1,5 @@
 import argparse
+import FinanceCalcs
 
 
 
@@ -15,4 +16,6 @@ parser.add_argument("-m", "--compound_periods", type=int, required=True, help="n
 
 parser.parse_args()
 args = parser.parse_args()
-print(args)
+
+simplecalc = FinanceCalcs.SimpleFinanceCalc()
+simplecalc.s_interest(**args)
