@@ -45,7 +45,7 @@ pipeline {
             post {
                 success {
                     echo "Limpiando el folder con la application empaquetada"
-                    archiveArtifacts "${env.BUILD_ID}/sources/dist/calcs"
+                    archiveArtifacts "${env.BUILD_ID}/sources/dist/"
                     sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
                 }
             }
