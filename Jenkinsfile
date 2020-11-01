@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-       /* stage('Deploy') {
+        stage('Deploy') {
             agent any
             environment {
                 VOLUME = '$(pwd)/sources:/src'
@@ -48,7 +48,7 @@ pipeline {
                     archiveArtifacts "${env.BUILD_ID}/sources/dist/calcs"
                     sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
                 }
-            } */
+            }
         }
     }
 }
