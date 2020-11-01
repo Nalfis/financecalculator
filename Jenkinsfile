@@ -9,7 +9,7 @@ pipeline {
             }
             steps{
                 echo "Compilando los dos programitas"
-                sh 'python -m py_compile common/FinanceCalcs.py calcs.py'
+                sh 'python -m py_compile FinanceCalcs.py calcs.py'
                 stash(name: 'compiled-results', includes: '*.py*')
             }
         }
