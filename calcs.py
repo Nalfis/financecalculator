@@ -1,5 +1,5 @@
 # import common.utils as Utils
-from common import FinanceCalcs
+import FinanceCalcs
 
 # Construct Object Fincal
 simpcalc = FinanceCalcs.SimpleFinanceCalc()

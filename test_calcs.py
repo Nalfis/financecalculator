@@ -1,5 +1,5 @@
 import unittest
-from common import FinanceCalcs
+import FinanceCalcs
 
 
 class TestCalc(unittest.TestCase):
