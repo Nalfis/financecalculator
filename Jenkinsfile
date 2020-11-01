@@ -10,7 +10,7 @@ pipeline {
             steps{
                 echo "Compilando los dos programitas"
                 sh 'python -m py_compile common/FinanceCalcs.py calcs.py'
-                stash(name: 'compiled-results', includes: 'common/*.py*, *.py*')
+                stash(name: 'compiled-results', includes: '*.py*')
             }
         }
         stage('Tests') {
@@ -21,7 +21,7 @@ pipeline {
             }
             steps {
                 echo "a ver si puede correr las pruebas"
-                sh 'py.test --junit-xml test-reports/results tests/test_calcs.py'
+                sh 'py.test --junit-xml test-reports/results test_calcs.py'
             }
             post {
                 always {
