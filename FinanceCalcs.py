@@ -29,15 +29,15 @@ class SimpleFinanceCalc(object):
             self.interest_rate = float(kwargs['interest_rate'])/100
             self.time = kwargs['time']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self.principal <= 0:
-            print ("Principal amount should be larger than zero")
+            print("Principal amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._interest = self.principal * self.interest_rate * self.time
-            print ("\nPrincipal %s \nInt Rate: %s \nLoan Time: %s \nInterest: %s" \
+            print("\nPrincipal %s \nInt Rate: %s \nLoan Time: %s \nInterest: %s"
                   % ('${:0,.2f}'.format(self.principal),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -55,16 +55,16 @@ class SimpleFinanceCalc(object):
             self.interest_rate = float(kwargs['interest_rate'])/100
             self.time = kwargs['time']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self.principal <= 0:
-            print ("Principal amount should be larger than zero")
+            print("Principal amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._interest = (self.principal * self.interest_rate * self.time)
             self._future_value = self.principal + (self.principal * self.interest_rate * self.time)
-            print ("\nPrincipal %s \nInt Rate: %s \nLoan Time: %s \nInterest: %s \nFuture Value: %s" \
+            print("\nPrincipal %s \nInt Rate: %s \nLoan Time: %s \nInterest: %s \nFuture Value: %s"
                   % ('${:0,.2f}'.format(self.principal),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -85,15 +85,15 @@ class SimpleFinanceCalc(object):
             self.interest_rate = float(kwargs['interest_rate'])/100
             self.time = kwargs['time']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self._future_value <= 0:
-            print ("Principal amount should be larger than zero")
+            print("Principal amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._present_value = self._future_value / (1 + self.interest_rate * self.time)
-            print ("\nFuture Value %s \nInt Rate: %s \nLoan Time: %s \nPresent Value: %s" \
+            print("\nFuture Value %s \nInt Rate: %s \nLoan Time: %s \nPresent Value: %s"
                   % ('${:0,.2f}'.format(self._future_value),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -127,15 +127,15 @@ class CompoundFinanceCalc(object):
             self.time = kwargs['time']
             self.periods = kwargs['periods']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self.principal <= 0:
-            print ("Principal amount should be larger than zero")
+            print("Principal amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._future_value = self.principal * (1 + (self.interest_rate/self.periods)) ** (self.periods * self.time)
-            print ("\nPrincipal %s \nInt Rate: %s\nLoan Time: %s\nPeriods: %s\nTotal Periods %s\nFuture Value: %s" \
+            print("\nPrincipal %s \nInt Rate: %s\nLoan Time: %s\nPeriods: %s\nTotal Periods %s\nFuture Value: %s"
                   % ('${:0,.2f}'.format(self.principal),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -158,16 +158,16 @@ class CompoundFinanceCalc(object):
             self.time = kwargs['time']
             self.periods = kwargs['periods']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self._future_value <= 0:
-            print ("Future Value amount should be larger than zero")
+            print("Future Value amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._present_value = self._future_value / (
                 (1 + (self.interest_rate / self.periods)) ** (self.periods * self.time))
-            print ("\nFuture Value %s\nInt Rate: %s\nLoan Time: %s\nPeriods: %s\nTotal Periods %s\nPresent Value: %s" \
+            print("\nFuture Value %s\nInt Rate: %s\nLoan Time: %s\nPeriods: %s\nTotal Periods %s\nPresent Value: %s"
                   % ('${:0,.2f}'.format(self._future_value),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -184,21 +184,24 @@ class CompoundFinanceCalc(object):
 
     def c_pv2pmt(self, **kwargs):
         if kwargs is not None:
-            self._present_value = kwargs['present_value']
+            if 'principal' in kwargs:
+                self._present_value = kwargs['principal']
+            else:
+                self._present_value = kwargs['present_value']
             self.interest_rate = float(kwargs['interest_rate'])/100
             self.time = kwargs['time']
             self.periods = kwargs['periods']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self._present_value <= 0:
-            print ("Future Value amount should be larger than zero")
+            print("Future Value amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._pmt = self._present_value * ((self.interest_rate / self.periods) / (
                 1 - (1 + (self.interest_rate / self.periods)) ** (-1 * self.periods * self.time)))
-            print ("\nPresent Value %s\nInt Rate: %s\nLoan Time: %s\nPeriods: %s\nTotal Periods %s\nPayment: %s" \
+            print("\nPresent Value %s\nInt Rate: %s\nLoan Time: %s\nPeriods: %s\nTotal Periods %s\nPayment: %s"
                   % ('${:0,.2f}'.format(self._present_value),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -221,18 +224,18 @@ class CompoundFinanceCalc(object):
             self.time = kwargs['time']
             self.periods = kwargs['periods']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self._pmt <= 0:
-            print ("Principal amount should be larger than zero")
+            print("Principal amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._present_value = self._pmt * (
                         (1 - (1 + (self.interest_rate / self.periods)) ** (-1 * self.periods * self.time)) / (
                             self.interest_rate / self.periods))
-            print ("\nPayment %s\nInt Rate: %s\nLoan Time: %s\n" \
-                  "Periods: %s\nTotal Periods %s\nPresent Value of Annuity: %s" \
+            print("\nPayment %s\nInt Rate: %s\nLoan Time: %s\n" \
+                  "Periods: %s\nTotal Periods %s\nPresent Value of Annuity: %s"
                   % ('${:0,.2f}'.format(self._pmt),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -250,21 +253,24 @@ class CompoundFinanceCalc(object):
     def c_fv2pmt(self, **kwargs):
 
         if kwargs is not None:
-            self._future_value = kwargs['future_value']
+            if 'principal' in kwargs:
+                self._future_value = kwargs['principal']
+            else:
+                self._future_value = kwargs['future_value']
             self.interest_rate = float(kwargs['interest_rate'])/100
             self.time = kwargs['time']
             self.periods = kwargs['periods']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self._future_value <= 0:
-            print ("Future Value amount should be larger than zero")
+            print("Future Value amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._pmt = self._future_value * ((self.interest_rate / self.periods) / (
                   (1 + (self.interest_rate / self.periods)) ** (self.periods * self.time)-1))
-            print ("\nPresent Value %s\nInt Rate: %s\nLoan Time: %s\nPeriods: %s\nTotal Periods %s\nPayment: %s" \
+            print("\nPresent Value %s\nInt Rate: %s\nLoan Time: %s\nPeriods: %s\nTotal Periods %s\nPayment: %s"
                   % ('${:0,.2f}'.format(self._future_value),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -287,18 +293,18 @@ class CompoundFinanceCalc(object):
             self.time = kwargs['time']
             self.periods = kwargs['periods']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         if self._pmt <= 0:
-            print ("Principal amount should be larger than zero")
+            print("Principal amount should be larger than zero")
         elif self.interest_rate <= 0:
-            print ("Interest rate should be larger than zero")
+            print("Interest rate should be larger than zero")
         else:
             self._future_value = self._pmt * (
                         ((1 + (self.interest_rate / self.periods)) ** (self.periods * self.time)-1) / (
                             self.interest_rate / self.periods))
-            print ("\nPayment %s\nInt Rate: %s\nLoan Time: %s\n" \
-                  "Periods: %s\nTotal Periods %s\nPresent Value of Annuity: %s" \
+            print("\nPayment %s\nInt Rate: %s\nLoan Time: %s\n"
+                  "Periods: %s\nTotal Periods %s\nPresent Value of Annuity: %s"
                   % ('${:0,.2f}'.format(self._pmt),
                      '{:0,.4f}'.format(self.interest_rate),
                      self.time,
@@ -325,17 +331,17 @@ class CompoundFinanceCalc(object):
             self.time = kwargs['time']
             self.periods = kwargs['periods']
         else:
-            print ("Something went wrong, check the Args in the Dictionary")
+            print("Something went wrong, check the Args in the Dictionary")
 
         periods = int(self.time * self.periods)
         interest_paid = self.principal * (self.interest_rate / self.periods)
         principal_paid = self._pmt - interest_paid
         balance = self.principal - principal_paid
 
-        print ("\nPayment#:  Payment  Principal paid:  Interest paid: Balance:")
-        print ("   0        %s     %s           %s    %s" % (
-        '${:0,.2f}'.format(self._pmt), '${:0,.2f}'.format(principal_paid), '${:0,.2f}'.format(interest_paid),
-        '${:0,.2f}'.format(balance)))
+        print("\nPayment#:  Payment  Principal paid:  Interest paid: Balance:")
+        print("   0        %s     %s           %s    %s" % (
+            '${:0,.2f}'.format(self._pmt), '${:0,.2f}'.format(principal_paid), '${:0,.2f}'.format(interest_paid),
+            '${:0,.2f}'.format(balance)))
 
         for i in range(periods - 1):
             self.principal -= principal_paid
@@ -344,7 +350,7 @@ class CompoundFinanceCalc(object):
             balance = self.principal - principal_paid
             if interest_paid < 0:
                 break
-            print ("    %s        %s     %s           %s    %s" % (i + 1, '${:0,.2f}'.format(self._pmt),
+            print("    %s        %s     %s           %s    %s" % (i + 1, '${:0,.2f}'.format(self._pmt),
                                                                   '${:0,.2f}'.format(principal_paid),
                                                                   '${:0,.2f}'.format(interest_paid),
                                                                   '${:0,.2f}'.format(balance)))

@@ -28,6 +28,7 @@ parser.add_argument("-cpv2pmt", "--c_pv2pmt", action='store_true', required=Fals
 parser.add_argument("-cpmt2pv", "--c_pmt2pv", action='store_true', required=False, help="Calculate Payment to Compound Present Value")
 parser.add_argument("-cfv2pmt", "--c_fv2pmt", action='store_true', required=False, help="Calculate Compound Future Value to Payment")
 parser.add_argument("-cpmt2fv", "--c_pmt2fv", action='store_true', required=False, help="Calculate Payment to Compound Future Value")
+parser.add_argument("-camort", "--c_amort", action='store_true', required=False, help="Calculate Amortization Schedule")
 
 parser.parse_args()
 args = parser.parse_args()
@@ -60,3 +61,8 @@ else:
         compoundcalc.c_fv2pmt(**compound_args)
     elif args.c_pmt2fv:
         compoundcalc.c_pmt2fv(**compoundcalc.c_fv2pmt(**compound_args))
+    elif args.c_amort:
+        compoundcalc.c_pv2pmt(**compound_args)
+        compoundcalc.amort_sched(**compoundcalc.c_pv2pmt(**compound_args))
+    else:
+        print("something went wrong, check the args list or use -h for more info")
